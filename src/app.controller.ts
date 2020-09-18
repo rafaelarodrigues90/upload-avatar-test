@@ -2,7 +2,6 @@ import { Controller, Get, Param, Post, Res, UploadedFile, UseInterceptors } from
 import { FileInterceptor } from '@nestjs/platform-express';
 import { editFileName, imageFileFilter } from './utils/file-uploading.utils';
 import { diskStorage } from 'multer'
-import * as fs from 'fs';
 
 @Controller()
 export class AppController {
@@ -18,14 +17,6 @@ export class AppController {
     const response = {
       originalname: file.originalname,
       filename: file.filename
-    }
-
-    if (fs.statSync("file")) {
-      fs.writeFile('file/avatar-profile', response, (err) => {
-        if (err) {
-          return err
-        }
-      })
     }
     return response
   }
